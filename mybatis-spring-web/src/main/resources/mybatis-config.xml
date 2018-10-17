@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+	"-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<typeAliases>
+		<typeAlias type="model.Comment" alias="Comment" />
+		<typeAlias type="model.Reply" alias="Reply" />
+	</typeAliases>
+	<!-- db컨넥션 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="smrit" />
+				<property name="password" value="oracle" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource = "repository/mapper/CommentMapper.xml"/>
+	</mappers>
+</configuration>
