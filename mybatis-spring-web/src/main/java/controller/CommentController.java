@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.Comment;
+import model.Member;
 import service.CommentService;
 
 @Controller
@@ -67,11 +68,32 @@ public class CommentController {
 	}
 	@RequestMapping(value="/ajax.do", method=RequestMethod.GET)
 	public String Ajaxmain(Model model) {
-		return "jsp/ajaxmain";
+		return "ajax/ajaxmain";
+	}
+	@RequestMapping(value="/main1.do", method=RequestMethod.GET)
+	public String Ajaxmain1(Model model) {
+		return "ajax/ajaxmain1";
+	}
+	@RequestMapping(value="/main2.do", method=RequestMethod.GET)
+	public String Ajaxmain2(Model model) {
+		return "ajax/ajaxmain2";
 	}
 	@RequestMapping(value="/ajax.do", method=RequestMethod.POST)
 	public String handleStep(HttpServletRequest request, Model model) {
+		System.out.println("1");
+		System.out.println(request.getParameter("n"));
 		commentService.ajaxSelect(request, model);
-		return "jsp/ajaxhtml";
+		return "ajax/ajaxhtml";
+	}
+	@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	public String login(Model model) {
+		return "login/loginForm";
+	}
+	@RequestMapping(value="/login_pro.do", method=RequestMethod.POST)
+	public String loginPro(Member member, Model model) {
+		System.out.println("controller"+member.getIID());
+		System.out.println("controller"+member.getPASSWD());
+		commentService.memberSelect(member, model);
+		return "login/loginPro";
 	}
 }

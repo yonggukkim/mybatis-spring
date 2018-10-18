@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import model.Comment;
+import model.Member;
 import repository.CommentSessionRepository;
 
 @Service
@@ -44,5 +45,21 @@ public class CommentService {
 		List list = commentRepository.ajaxSelect(result);
 		model.addAttribute("list",list);
 		model.addAttribute("result",result);
+	}
+	public void memberSelect(Member member, Model model) {
+		System.out.println("service" + member.getIID());
+		System.out.println("service" + member.getPASSWD());
+		Member mb = commentRepository.memberSelect(member);
+		int result = 0;
+		if(mb != null) {
+			if(!mb.getPASSWD().equals(member.getPASSWD())) {
+				result = 2;
+			}else {
+				result = 4;
+			}
+		}else {
+			result = 1;
+		}
+		model.addAttribute("result", result);
 	}
 }

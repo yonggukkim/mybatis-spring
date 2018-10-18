@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="model.Comment" alias="Comment" />
 		<typeAlias type="model.Reply" alias="Reply" />
+		<typeAlias type="model.Member" alias="Member" />
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import model.Comment;
+import model.Member;
 
 @Repository
 public class CommentSessionRepository extends AbstractRepository{
@@ -74,6 +75,17 @@ public class CommentSessionRepository extends AbstractRepository{
 		try {
 			System.out.println("Repository"+ result);
 			return sqlSession.selectList(statement);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	public Member memberSelect(Member member) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		String statement = namespace + ".memberSelect";
+		System.out.println("Repository"+member.getIID());
+		System.out.println("Repository"+member.getPASSWD());
+		try {
+		return sqlSession.selectOne(statement, member);
 		}finally {
 			sqlSession.close();
 		}

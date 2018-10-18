@@ -56,10 +56,6 @@
 	SELECT comment_no, user_id, comment_content, reg_date FROM comment1
 </select>
 
-<select id="ajaxSelect1" resultMap="baseResultMap1">
-	SELECT reply_no, comment_no, user_id, reply_content, reg_date FROM reply
-</select>
-
 <resultMap type="Reply" id="baseResultMap1">
 	<id column="reply_no" jdbcType="BIGINT" property="replyNo" />
 	<result column="comment_no" jdbcType="BIGINT" property="commentNo" />
@@ -67,4 +63,23 @@
 	<result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
 	<result column="reg_date" jdbcType="TIMESTAMP" property="regDate"/>
 </resultMap>
+
+<select id="ajaxSelect1" resultMap="baseResultMap1">
+	SELECT reply_no, comment_no, user_id, reply_content, reg_date FROM reply
+</select>
+
+<resultMap type="Member" id="memberMap">
+	<constructor>
+		<idArg column="id" javaType="long" />
+		<arg column="email" javaType="string" />
+		<arg column="password" javaType="string" />
+		<arg column="name" javaType="string" />
+		<arg column="regdate" javaType="date" />
+	</constructor>
+</resultMap>
+
+<select id="memberSelect" parameterType="Member" resultMap="memberMap">
+	SELECT id, email, password, name, regdate FROM member2
+	WHERE id = #{IID}
+</select>
 </mapper>
