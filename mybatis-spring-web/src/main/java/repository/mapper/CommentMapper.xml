@@ -68,7 +68,7 @@
 	SELECT reply_no, comment_no, user_id, reply_content, reg_date FROM reply
 </select>
 
-<resultMap type="Member" id="memberMap">
+<resultMap type="Member2" id="memberMap">
 	<constructor>
 		<idArg column="id" javaType="long" />
 		<arg column="email" javaType="string" />
@@ -78,8 +78,38 @@
 	</constructor>
 </resultMap>
 
-<select id="memberSelect" parameterType="Member" resultMap="memberMap">
+<select id="memberSelect" parameterType="Member2" resultMap="memberMap">
 	SELECT id, email, password, name, regdate FROM member2
 	WHERE id = #{IID}
+</select>
+
+<resultMap type="Aca" id="acaMap">
+	<id column="anum" jdbcType="BIGINT" property="anum" />
+	<result column="aname" jdbcType="VARCHAR" property="aname"/>
+</resultMap>
+
+<select id="acaSelect" parameterType="Aca" resultMap="acaMap">
+	SELECT anum, aname FROM aca
+</select>
+
+<resultMap type="Bca" id="bcaMap">
+	<id column="bnum" jdbcType="BIGINT" property="bnum" />
+	<result column="anum" jdbcType="BIGINT" property="anum" />
+	<result column="bname" jdbcType="VARCHAR" property="bname" />
+</resultMap>
+
+<select id="bcaSelect" parameterType="Aca" resultMap="bcaMap">
+	SELECT bnum, anum, bname FROM bca WHERE anum = #{anum}
+</select>
+
+<resultMap type="Cca" id="ccaMap">
+	<id column="cnum" jdbcType="BIGINT" property="cnum" />
+	<result column="bnum" jdbcType="BIGINT" property="bnum" />
+	<result column="anum" jdbcType="BIGINT" property="anum" />
+	<result column="cname" jdbcType="VARCHAR" property="cname" />
+</resultMap>
+
+<select id="ccaSelect" parameterType="Bca" resultMap="ccaMap">
+	SELECT cnum, bnum, anum, cname FROM cca WHERE anum = #{anum} and bnum = #{bnum}
 </select>
 </mapper>

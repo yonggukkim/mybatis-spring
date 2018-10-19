@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import model.Aca;
+import model.Bca;
 import model.Comment;
-import model.Member;
+import model.Member2;
 import service.CommentService;
 
 @Controller
@@ -90,10 +92,29 @@ public class CommentController {
 		return "login/loginForm";
 	}
 	@RequestMapping(value="/login_pro.do", method=RequestMethod.POST)
-	public String loginPro(Member member, Model model) {
+	public String loginPro(Member2 member, Model model) {
 		System.out.println("controller"+member.getIID());
 		System.out.println("controller"+member.getPASSWD());
 		commentService.memberSelect(member, model);
 		return "login/loginPro";
+	}
+	@RequestMapping(value="/domino.do", method=RequestMethod.GET)
+	public String domino(Model model) {
+		commentService.dominoSelectA(model);
+		return "domino/dominomain";
+	}
+	@RequestMapping(value="/bca.do", method=RequestMethod.POST)
+	public String dominoBca(Aca aca, Model model){
+		System.out.println("controller2 "+aca.getAnum());
+		System.out.println("controller2 "+aca.getAname());
+		commentService.dominoSelectB(aca, model);
+		return "domino/bca";
+	}
+	@RequestMapping(value="/cca.do", method=RequestMethod.POST)
+	public String dominoCca(Bca bca, Model model) {
+		System.out.println("controller3 "+bca.getBnum());
+		System.out.println("controller3 "+bca.getBname());
+		commentService.dominoSelectC(bca, model);
+		return "domino/cca";
 	}
 }

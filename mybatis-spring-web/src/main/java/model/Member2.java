@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class Member implements Serializable{
+public class Member2 implements Serializable{
 	private Long IID;
 	private String email;
 	private String PASSWD;
 	private String name;
 	private Date regDate;
-	public Member() {}
-	public Member(Long iID, String email, String pASSWD, String name, Date regDate) {
+	public Member2() {}
+	public Member2(Long iID, String email, String pASSWD, String name, Date regDate) {
 		IID = iID;
 		this.email = email;
 		PASSWD = pASSWD;
